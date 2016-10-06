@@ -1,0 +1,22 @@
+{
+  "name": "oh-i-use",
+  "version": "1.0.0",
+  "description": "Developing Javascript web apps can be convoluted. Become that bleeding edge dev with the coolest sounding tech stack made from _randomly generated fake tool names_.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run vendor && babel src --out-dir dist",
+    "watch": "npm run vendor && babel src --watch --out-dir dist --source-maps inline",
+    "vendor": "mkdir -p vendor vendor/css vendor/js && cp -R ./src/favicon ./dist/favicon && cp -R ./node_modules/skeleton-css/css/ ./vendor/css && cp ./node_modules/vue/dist/vue.min.js ./vendor/js/vue.min.js && cp ./node_modules/whatwg-fetch/fetch.js ./vendor/js/fetch.js"
+  },
+  "author": "Joe Wroten <sharpshark28@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0"
+  },
+  "dependencies": {
+    "skeleton-css": "^2.0.4",
+    "vue": "^2.0.1",
+    "whatwg-fetch": "^1.0.0"
+  }
+}
