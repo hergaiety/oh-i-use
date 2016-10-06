@@ -47,6 +47,7 @@ let app = new Vue({
   },
   methods: {
     newStack() {
+      ga('send', 'event', 'UI', 'button', 'Generate Stack');
       this.loading = true;
       this.stack = generateStack()
         .then(stack => {
