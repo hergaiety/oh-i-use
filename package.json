@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run vendor && babel src --out-dir dist",
     "watch": "npm run vendor && babel src --watch --out-dir dist --source-maps inline",
-    "vendor": "mkdir -p vendor vendor/css vendor/js && cp -R ./src/favicon ./dist/favicon && cp -R ./node_modules/skeleton-css/css/ ./vendor/css && cp ./node_modules/vue/dist/vue.min.js ./vendor/js/vue.min.js && cp ./node_modules/whatwg-fetch/fetch.js ./vendor/js/fetch.js",
+    "vendor": "mkdir -p ./vendor ./vendor/css ./vendor/js ./dist ./dist/favicon && cp -R ./src/favicon ./dist && cp -R ./node_modules/skeleton-css/css/ ./vendor/css && cp ./node_modules/vue/dist/vue.min.js ./vendor/js/vue.min.js && cp ./node_modules/whatwg-fetch/fetch.js ./vendor/js/fetch.js",
     "clean": "rm -rf ./vendor ./dist"
   },
   "author": "Joe Wroten <sharpshark28@gmail.com>",
