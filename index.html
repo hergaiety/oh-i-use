@@ -6,7 +6,7 @@
 
   <title>Oh I Use...</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
   <link rel="stylesheet" href="./vendor/css/normalize.css">
   <link rel="stylesheet" href="./vendor/css/skeleton.css">
   <link rel="stylesheet" href="./app.css">
@@ -54,18 +54,30 @@
         <h1>Oh I Use...</h1>
 
         <div v-if="loading" class="loader">Loading...</div>
-        <p v-else class="row">
-          <code id="stack" class="twelve column">
-            <br />
-            {{ stack }}
-            <br />
-            <br />
-          </code>
-        </p>
+        <h4 v-else v-html="stackMarkdown" class="row"></h4>
 
-        <button v-on:click="newStack" class="button-primary u-full-width">
+        <label>
+          <input id="howManyWords" type="number" step="1" min="1" max="15" v-model.number="howManyWords" />
+          <span class="label-body">
+            How many terms?
+          </span>
+        </label>
+
+        <label v-for="theme in defaultWordThemes">
+          <input type="checkbox" v-model="wordThemes" v-bind:value="theme" checked />
+          <span class="label-body">
+            {{ theme }}
+          </span>
+        </label>
+
+        <button
+          v-on:click="newStack"
+          v-bind:disabled="!validSettings"
+          v-bind:class="{ 'button-primary': validSettings }"
+          class="u-full-width">
           No that's stupid, try again.
-        </h1>
+        </button>
+
       </div>
     </div>
 
@@ -81,6 +93,7 @@
     ga('send', 'pageview');
   </script>
   <script src="./vendor/js/fetch.js"></script>
+  <script src="./vendor/js/marked.min.js"></script>
   <script src="./vendor/js/vue.min.js"></script>
   <script src="./dist/app.js"></script>
 </body>

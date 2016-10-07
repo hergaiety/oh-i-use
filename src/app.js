@@ -2,9 +2,10 @@ Array.prototype.random = function() {
   return this[Math.floor(Math.random() * this.length)];
 }
 
-let wordThemes = ['candy', 'beer', 'coffee', 'car', 'liquor', 'mustache'];
+let defaultWordThemes = ['candy', 'coffee', 'speed', 'liquor', 'facial hair'];
+let defaultHowManyWords = 3;
+
 let suffixes = ['', 'JS', 'Script', '.js', '.io', 'DB'];
-let wordsToUse = 3;
 
 let stackPhrases = {
   intros: [
@@ -43,7 +44,18 @@ let app = new Vue({
   el: '#app',
   data: {
     loading: true,
-    stack: ''
+    stack: '',
+    defaultWordThemes,
+    wordThemes: defaultWordThemes,
+    howManyWords: defaultHowManyWords
+  },
+  computed: {
+    stackMarkdown() {
+      return marked(this.stack, { sanitize: true });
+    },
+    validSettings() {
+      return this.wordThemes.length && this.howManyWords > 0;
+    }
   },
   methods: {
     newStack() {
@@ -62,12 +74,14 @@ let app = new Vue({
   }
 });
 
-// Fire off a new stack request on load
-app.newStack();
+app.newStack(); // Fire off a new stack request on load
 
 function generateStack() {
-  return Promise.all(wordThemes.map(w => getWordsRelatedTo(w)))
-    .then(data => data.reduce((prev, cur) => [].concat(prev.length ? prev : [], cur.hasTypes)))
+  return Promise.all(app.wordThemes.map(w => getWordsRelatedTo(w)))
+    .then(data => {
+      data = data.map(d => d.hasTypes);
+      return [].concat.apply([], data);
+    })
     .then(wordsToStack);
 }
 
@@ -79,13 +93,13 @@ function getWordsRelatedTo(word) {
 function wordsToStack(allWords) {
   let stack = stackPhrases.intros.random();
 
-  for (let i = 1; i <= wordsToUse; i++) {
+  for (let i = 1; i <= app.howManyWords; i++) {
     let techWord = wordToTechTerm(allWords.random());
     let variety = stackPhrases.toolVarieties.random();
     let connection = stackPhrases.toolConnections.random();
     let outro = stackPhrases.outros.random();
-    let end = i < wordsToUse ? connection : outro;
-    stack += ` ${techWord} ${variety} ${end}`;
+    let end = i < app.howManyWords ? connection : outro;
+    stack += ` **${techWord}** ${variety} ${end}`;
   }
 
   return stack;

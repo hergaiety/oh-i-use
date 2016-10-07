@@ -1,5 +1,15 @@
-#stack {
-  white-space: normal;
+#howManyWords {
+  width: 3.5em;
+}
+
+label {
+  display: inline;
+  margin-right: 1.5em;
+  text-transform: capitalize;
+}
+
+button {
+  cursor: pointer;
 }
 
 /* Thanks to http://projects.lukehaas.me/css-loaders */
