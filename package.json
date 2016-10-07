@@ -1,6 +1,6 @@
 {
   "name": "oh-i-use",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Developing Javascript web apps can be convoluted. Become that bleeding edge dev with the coolest sounding tech stack made from _randomly generated fake tool names_.",
   "main": "index.js",
   "scripts": {
