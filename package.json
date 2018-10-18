@@ -4,6 +4,7 @@
   "description": "Developing Javascript web apps can be convoluted. Become that bleeding edge dev with the coolest sounding tech stack made from _randomly generated fake tool names_.",
   "main": "index.js",
   "scripts": {
+    "start": "node ./index.js",
     "build": "npm run vendor && babel src --out-dir dist",
     "watch": "npm run vendor && babel src --watch --out-dir dist --source-maps inline",
     "vendor": "mkdir -p ./vendor ./vendor/css ./vendor/js ./dist ./dist/favicon && cp -R ./src/favicon ./dist && cp -R ./node_modules/skeleton-css/css/ ./vendor/css && cp ./node_modules/vue/dist/vue.min.js ./vendor/js/vue.min.js && cp ./node_modules/whatwg-fetch/fetch.js ./vendor/js/fetch.js && cp ./node_modules/marked/marked.min.js ./vendor/js/marked.min.js",
@@ -17,6 +18,8 @@
   },
   "dependencies": {
     "marked": "^0.3.6",
+    "node-fetch": "^2.2.0",
+    "prompts": "^1.1.1",
     "skeleton-css": "^2.0.4",
     "vue": "^2.0.1",
     "whatwg-fetch": "^1.0.0"
